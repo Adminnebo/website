@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebo AI — Agentes de inteligencia artificial para tu negocio</title>
+<meta name="description" content="Nebo AI diseña, entrena y despliega agentes de IA que llaman, responden y automatizan. Voz, WhatsApp, integraciones y desarrollo a medida.">
+<meta property="og:title" content="Nebo AI — Agentes de inteligencia artificial">
+<meta property="og:description" content="Agentes de IA que atienden llamadas, responden en WhatsApp y automatizan tu operación.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%2322d3ee' stroke-width='9'/%3E%3Ccircle cx='50' cy='50' r='13' fill='%238b5cf6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   NEBO AI — dark / tech / neon
+   Single-file landing. No build step, no dependencies.
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Neon accents */
+  --cyan: #22d3ee;
+  --cyan-bright: #67e8f9;
+  --cyan-dim: #0e9fb8;
+  --violet: #8b5cf6;
+  --violet-bright: #a78bfa;
+  --violet-dim: #6d3fd4;
+
+  --cyan-glow: rgba(34, 211, 238, 0.22);
+  --cyan-subtle: rgba(34, 211, 238, 0.08);
+  --violet-glow: rgba(139, 92, 246, 0.22);
+  --violet-subtle: rgba(139, 92, 246, 0.08);
+
+  /* Backgrounds — near-black, never pure */
+  --bg: #06080c;
+  --bg2: #0b0f16;
+  --bg3: #111722;
+  --bg4: #18202e;
+
+  /* Text */
+  --text: #eef2f7;
+  --text-dim: #b6c0cf;
+  --muted: #7d8899;
+  --faded: #545e6d;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-cyan: rgba(34, 211, 238, 0.30);
+
+  --radius: 14px;
+  --radius-lg: 22px;
+  --maxw: 1160px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ambient glow behind everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, var(--cyan-subtle), transparent 65%),
+    radial-gradient(50rem 36rem at 90% 5%, var(--violet-subtle), transparent 60%);
+}
+
+/* Film grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.38;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+main, header, footer { position: relative; z-index: 2; }
+
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+
+::selection { background: var(--cyan); color: #04202a; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: 110px 0; }
+
+/* ---------- Shared bits ---------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid var(--border-cyan);
+  background: var(--cyan-subtle);
+  border-radius: 100px;
+  padding: 7px 16px;
+  margin-bottom: 22px;
+}
+.eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.section-head { max-width: 720px; margin-bottom: 60px; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-head h2 { font-size: clamp(30px, 4.2vw, 46px); margin-bottom: 18px; }
+.section-head p { color: var(--muted); font-size: 17px; }
+
+.grad {
+  background: linear-gradient(100deg, var(--cyan-bright), var(--violet-bright));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px 24px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: linear-gradient(100deg, var(--cyan), var(--violet));
+  color: #05131a;
+  font-weight: 600;
+  box-shadow: 0 8px 30px -8px var(--cyan-glow);
+}
+.btn-primary:hover { box-shadow: 0 14px 40px -8px var(--cyan-glow); }
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.btn-ghost:hover { border-color: var(--border-cyan); background: var(--cyan-subtle); }
+
+/* ---------- Nav ---------- */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(6, 8, 12, 0.72);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+header.scrolled { border-bottom-color: var(--border); background: rgba(6, 8, 12, 0.9); }
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 72px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.logo-mark {
+  width: 30px; height: 30px;
+  flex: 0 0 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, var(--violet) 0 28%, transparent 30%),
+              conic-gradient(from 200deg, var(--cyan), var(--violet), var(--cyan));
+  -webkit-mask: radial-gradient(circle at 50% 50%, #000 0 30%, transparent 32%, #000 66%, #000 100%);
+          mask: radial-gradient(circle at 50% 50%, #000 0 30%, transparent 32%, #000 66%, #000 100%);
+  box-shadow: 0 0 22px -4px var(--cyan-glow);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 14.5px;
+  color: var(--text-dim);
+}
+.nav-links a { transition: color 0.2s; }
+.nav-links a:hover { color: var(--cyan); }
+
+.nav-right { display: flex; align-items: center; gap: 14px; }
+
+.lang {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.lang button {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  font: inherit;
+}
+.lang button[aria-pressed="true"] { background: var(--cyan); color: #05131a; }
+.lang button:not([aria-pressed="true"]):hover { color: var(--text); }
+
+.burger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  width: 40px; height: 40px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.burger span {
+  display: block;
+  width: 18px; height: 1.5px;
+  background: var(--text);
+  position: relative;
+}
+.burger span::before, .burger span::after {
+  content: ''; position: absolute; left: 0;
+  width: 18px; height: 1.5px; background: var(--text);
+}
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+
+/* ---------- Hero ---------- */
+
+.hero { padding: 120px 0 90px; text-align: center; }
+
+.hero h1 {
+  font-size: clamp(38px, 6.4vw, 74px);
+  max-width: 15ch;
+  margin: 0 auto 24px;
+}
+
+.hero-sub {
+  font-size: clamp(16px, 1.5vw, 19px);
+  color: var(--text-dim);
+  max-width: 62ch;
+  margin: 0 auto 38px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.hero-note { font-size: 13.5px; color: var(--faded); }
+
+/* Orbit visual */
+.orbit {
+  position: relative;
+  width: min(560px, 90vw);
+  height: min(560px, 90vw);
+  margin: 60px auto -60px;
+  opacity: 0.9;
+}
+.orbit .ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+.orbit .ring:nth-child(2) { inset: 14%; border-color: rgba(34,211,238,0.14); }
+.orbit .ring:nth-child(3) { inset: 28%; border-color: rgba(139,92,246,0.16); }
+.orbit .core {
+  position: absolute;
+  inset: 40%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--cyan) 0%, var(--violet) 60%, transparent 72%);
+  filter: blur(18px);
+  opacity: 0.55;
+  animation: pulse 5s var(--ease) infinite;
+}
+@keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.45; } 50% { transform: scale(1.14); opacity: 0.7; } }
+
+.orbit .node {
+  position: absolute;
+  width: 11px; height: 11px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan);
+}
+.orbit .node.v { background: var(--violet); box-shadow: 0 0 16px var(--violet); }
+
+/* Stats strip */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 90px;
+}
+.stat { background: var(--bg2); padding: 30px 24px; text-align: center; }
+.stat b {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+.stat span { font-size: 13.5px; color: var(--muted); }
+
+/* ---------- Integrations marquee ---------- */
+
+.marquee-wrap {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.marquee-label {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faded);
+  margin-bottom: 30px;
+}
+.marquee {
+  display: flex;
+  gap: 56px;
+  width: max-content;
+  animation: slide 34s linear infinite;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee span {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--faded);
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.marquee span:hover { color: var(--text-dim); }
+@keyframes slide { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee { animation: none; }
+  .orbit .core { animation: none; }
+}
+
+/* ---------- Services ---------- */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg2), var(--bg));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+.card:hover::before { opacity: 0.7; }
+
+.card-icon {
+  width: 46px; height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--cyan-subtle);
+  border: 1px solid var(--border-cyan);
+  color: var(--cyan);
+  margin-bottom: 22px;
+}
+.card:nth-child(even) .card-icon {
+  background: var(--violet-subtle);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: var(--violet-bright);
+}
+.card h3 { font-size: 21px; margin-bottom: 10px; }
+.card p { color: var(--muted); font-size: 15.5px; margin-bottom: 20px; }
+
+.card ul { list-style: none; display: grid; gap: 9px; }
+.card li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14.5px;
+  color: var(--text-dim);
+}
+.card li::before {
+  content: '';
+  flex: 0 0 5px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+  margin-top: 9px;
+}
+.card:nth-child(even) li::before { background: var(--violet-bright); }
+
+/* ---------- Process ---------- */
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.step {
+  border-left: 1px solid var(--border);
+  padding: 4px 0 4px 24px;
+  position: relative;
+}
+.step::before {
+  content: '';
+  position: absolute;
+  left: -3px; top: 8px;
+  width: 5px; height: 34px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet));
+}
+.step-n {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+.step h3 { font-size: 18px; margin-bottom: 8px; }
+.step p { font-size: 14.5px; color: var(--muted); }
+
+/* ---------- Use cases ---------- */
+
+.cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.case {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color 0.3s, transform 0.3s var(--ease);
+}
+.case:hover { border-color: var(--border-cyan); transform: translateY(-3px); }
+.case-tag {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--violet-bright);
+  margin-bottom: 14px;
+}
+.case h3 { font-size: 18px; margin-bottom: 10px; }
+.case p { font-size: 14.5px; color: var(--muted); }
+
+/* ---------- FAQ ---------- */
+
+.faq { max-width: 800px; margin: 0 auto; display: grid; gap: 12px; }
+.faq details {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  transition: border-color 0.25s;
+}
+.faq details[open] { border-color: var(--border-cyan); }
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16.5px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: '+';
+  font-size: 22px;
+  color: var(--cyan);
+  line-height: 1;
+  transition: transform 0.25s var(--ease);
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq p { color: var(--muted); font-size: 15px; margin-top: 14px; }
+
+/* ---------- Contact ---------- */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 56px;
+}
+.contact-info h2 { font-size: clamp(28px, 3.4vw, 40px); margin-bottom: 16px; }
+.contact-info > p { color: var(--muted); margin-bottom: 30px; }
+.contact-list { list-style: none; display: grid; gap: 14px; }
+.contact-list li { display: flex; gap: 12px; align-items: center; font-size: 15px; color: var(--text-dim); }
+.contact-list svg { color: var(--cyan); flex: 0 0 18px; }
+.contact-list a:hover { color: var(--cyan); }
+
+form { display: grid; gap: 16px; }
+.field { display: grid; gap: 7px; }
+.field label { font-size: 13px; color: var(--muted); font-weight: 500; }
+.field input, .field select, .field textarea {
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  color: var(--text);
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+.field textarea { resize: vertical; min-height: 110px; }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px var(--cyan-subtle);
+}
+.field select { appearance: none; cursor: pointer; }
+form .btn { margin-top: 6px; }
+.form-status { font-size: 14px; color: var(--cyan); min-height: 20px; }
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 0 40px;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.footer-brand { max-width: 340px; }
+.footer-brand p { color: var(--muted); font-size: 14.5px; margin-top: 16px; }
+.footer-cols { display: flex; gap: 70px; flex-wrap: wrap; }
+.footer-col h4 {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faded);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.footer-col ul { list-style: none; display: grid; gap: 10px; }
+.footer-col a { font-size: 14.5px; color: var(--text-dim); transition: color 0.2s; }
+.footer-col a:hover { color: var(--cyan); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  font-size: 13.5px;
+  color: var(--faded);
+}
+
+/* ---------- Reveal on scroll ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 980px) {
+  section { padding: 80px 0; }
+  .services, .cases { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; padding: 36px 28px; }
+}
+
+@media (max-width: 720px) {
+  .nav-links {
+    position: absolute;
+    top: 72px; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 24px 20px;
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 13px 0; border-bottom: 1px solid var(--border); }
+  .burger { display: flex; }
+  nav .btn-primary { display: none; }
+  .steps { grid-template-columns: 1fr; }
+  .hero { padding: 80px 0 60px; }
+  .stats { margin-top: 60px; }
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo" aria-label="Nebo AI">
+        <span class="logo-mark" aria-hidden="true"></span>
+        Nebo<span style="color:var(--cyan)">AI</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#servicios" data-i18n="nav.services">Servicios</a>
+        <a href="#proceso" data-i18n="nav.process">Cómo funciona</a>
+        <a href="#casos" data-i18n="nav.cases">Casos de uso</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </div>
+
+      <div class="nav-right">
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="es" aria-pressed="true">ES</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <a href="#contacto" class="btn btn-primary" data-i18n="nav.cta">Agendar demo</a>
+        <button class="burger" id="burger" aria-label="Menú" aria-expanded="false"><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow" data-i18n="hero.eyebrow">Agentes de IA en producción</span>
+
+      <h1>
+        <span data-i18n="hero.title1">Agentes de IA que</span>
+        <span class="grad" data-i18n="hero.title2">trabajan por ti</span>
+        <span data-i18n="hero.title3">24/7</span>
+      </h1>
+
+      <p class="hero-sub" data-i18n="hero.sub">
+        En Nebo AI diseñamos, entrenamos y desplegamos agentes de inteligencia artificial
+        que atienden llamadas, responden en WhatsApp y automatizan tu operación —
+        conectados a tu CRM, tu calendario y tus herramientas.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#contacto" class="btn btn-primary" data-i18n="hero.cta1">Agendar demo gratuita</a>
+        <a href="#servicios" class="btn btn-ghost" data-i18n="hero.cta2">Ver servicios</a>
+      </div>
+
+      <p class="hero-note" data-i18n="hero.note">Sin permanencia · Primer agente en producción en 2 semanas</p>
+
+      <div class="orbit" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="core"></div>
+      </div>
+
+      <div class="stats reveal">
+        <div class="stat"><b class="grad">24/7</b><span data-i18n="stats.1">Disponibilidad, sin turnos</span></div>
+        <div class="stat"><b class="grad">&lt;1s</b><span data-i18n="stats.2">Latencia de respuesta</span></div>
+        <div class="stat"><b class="grad">+40</b><span data-i18n="stats.3">Integraciones nativas</span></div>
+        <div class="stat"><b class="grad">2 sem</b><span data-i18n="stats.4">De la idea a producción</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTEGRATIONS ================= -->
+  <div class="marquee-wrap">
+    <p class="marquee-label" data-i18n="marquee.label">Se conecta con tu stack</p>
+    <div class="marquee">
+      <span>WhatsApp</span><span>HubSpot</span><span>GoHighLevel</span><span>Twilio</span>
+      <span>Google Calendar</span><span>Salesforce</span><span>Slack</span><span>n8n</span>
+      <span>Zapier</span><span>Shopify</span><span>Notion</span><span>Stripe</span>
+      <span aria-hidden="true">WhatsApp</span><span aria-hidden="true">HubSpot</span><span aria-hidden="true">GoHighLevel</span><span aria-hidden="true">Twilio</span>
+      <span aria-hidden="true">Google Calendar</span><span aria-hidden="true">Salesforce</span><span aria-hidden="true">Slack</span><span aria-hidden="true">n8n</span>
+      <span aria-hidden="true">Zapier</span><span aria-hidden="true">Shopify</span><span aria-hidden="true">Notion</span><span aria-hidden="true">Stripe</span>
+    </div>
+  </div>
+
+  <!-- ================= SERVICIOS ================= -->
+  <section id="servicios">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="services.eyebrow">Servicios</span>
+        <h2 data-i18n="services.title">Todo lo que un agente puede hacer por tu negocio</h2>
+        <p data-i18n="services.sub">Cuatro líneas de trabajo. Puedes empezar por una y crecer desde ahí.</p>
+      </div>
+
+      <div class="services">
+
+        <article class="card reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="svc.voice.title">Agentes de voz</h3>
+          <p data-i18n="svc.voice.desc">Agentes que hacen y reciben llamadas con voz natural, entienden el contexto y actúan en tus sistemas mientras hablan.</p>
+          <ul>
+            <li data-i18n="svc.voice.1">Llamadas inbound: atención y soporte sin cola de espera</li>
+            <li data-i18n="svc.voice.2">Llamadas outbound: prospección y seguimiento de leads</li>
+            <li data-i18n="svc.voice.3">Cualificación automática y transferencia a un humano</li>
+            <li data-i18n="svc.voice.4">Agenda citas directamente en tu calendario</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="svc.chat.title">Chatbots y WhatsApp</h3>
+          <p data-i18n="svc.chat.desc">Conversaciones de texto que venden y resuelven. En WhatsApp, en tu web o en redes sociales, con el tono de tu marca.</p>
+          <ul>
+            <li data-i18n="svc.chat.1">WhatsApp Business API, web chat, Instagram y Messenger</li>
+            <li data-i18n="svc.chat.2">Responde con tu documentación y catálogo (RAG)</li>
+            <li data-i18n="svc.chat.3">Recupera carritos y reactiva leads fríos</li>
+            <li data-i18n="svc.chat.4">Handoff a agente humano cuando hace falta</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
+            </svg>
+          </div>
+          <h3 data-i18n="svc.auto.title">Automatizaciones e integraciones</h3>
+          <p data-i18n="svc.auto.desc">Los agentes solo sirven si tocan tus sistemas reales. Conectamos CRM, calendario, email, facturación y herramientas internas.</p>
+          <ul>
+            <li data-i18n="svc.auto.1">Workflows en n8n, Make o código propio</li>
+            <li data-i18n="svc.auto.2">Sincronización bidireccional con tu CRM</li>
+            <li data-i18n="svc.auto.3">APIs y webhooks a medida</li>
+            <li data-i18n="svc.auto.4">Reportes automáticos y alertas al equipo</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l2.6 6.6L21 9.7l-4.9 4.3 1.4 6.8L12 17.4 6.5 20.8l1.4-6.8L3 9.7l6.4-1.1z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="svc.consult.title">Consultoría y desarrollo a medida</h3>
+          <p data-i18n="svc.consult.desc">Antes de automatizar, hay que entender. Auditamos tus procesos, medimos dónde se pierde dinero y diseñamos la solución.</p>
+          <ul>
+            <li data-i18n="svc.consult.1">Auditoría de procesos y oportunidades de IA</li>
+            <li data-i18n="svc.consult.2">Diseño de arquitectura y elección de modelos</li>
+            <li data-i18n="svc.consult.3">Desarrollo custom sobre tu infraestructura</li>
+            <li data-i18n="svc.consult.4">Formación al equipo y traspaso de conocimiento</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESO ================= -->
+  <section id="proceso" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="process.eyebrow">Cómo funciona</span>
+        <h2 data-i18n="process.title">De la primera llamada a producción en 2 semanas</h2>
+        <p data-i18n="process.sub">Un proceso corto, con entregables claros en cada etapa.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-n">01</div>
+          <h3 data-i18n="step.1.title">Diagnóstico</h3>
+          <p data-i18n="step.1.desc">Una sesión de 45 minutos. Mapeamos tus procesos y detectamos dónde un agente aporta más valor.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-n">02</div>
+          <h3 data-i18n="step.2.title">Diseño</h3>
+          <p data-i18n="step.2.desc">Definimos el guion, las herramientas que usará el agente y los criterios de éxito. Sin sorpresas.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-n">03</div>
+          <h3 data-i18n="step.3.title">Construcción</h3>
+          <p data-i18n="step.3.desc">Entrenamos el agente con tu información, lo conectamos a tus sistemas y lo probamos contigo.</p>
+        </div>
+        <div class="step reveal">
+          <div class="step-n">04</div>
+          <h3 data-i18n="step.4.title">Optimización</h3>
+          <p data-i18n="step.4.desc">Lo lanzamos y medimos. Cada semana revisamos conversaciones reales y ajustamos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CASOS ================= -->
+  <section id="casos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" data-i18n="cases.eyebrow">Casos de uso</span>
+        <h2 data-i18n="cases.title">Donde un agente cambia los números</h2>
+        <p data-i18n="cases.sub">Los sectores donde vemos el retorno más rápido.</p>
+      </div>
+
+      <div class="cases">
+        <article class="case reveal">
+          <div class="case-tag" data-i18n="case.1.tag">Inmobiliaria</div>
+          <h3 data-i18n="case.1.title">Ningún lead sin llamar</h3>
+          <p data-i18n="case.1.desc">El agente llama al lead en menos de 60 segundos desde que llega el formulario, lo cualifica y agenda la visita en el calendario del asesor.</p>
+        </article>
+        <article class="case reveal">
+          <div class="case-tag" data-i18n="case.2.tag">Clínicas y salud</div>
+          <h3 data-i18n="case.2.title">Agenda llena, recepción libre</h3>
+          <p data-i18n="case.2.desc">Reserva, confirma y reprograma citas por teléfono y WhatsApp. Reduce las ausencias con recordatorios que sí contestan.</p>
+        </article>
+        <article class="case reveal">
+          <div class="case-tag" data-i18n="case.3.tag">E-commerce</div>
+          <h3 data-i18n="case.3.title">Soporte que no duerme</h3>
+          <p data-i18n="case.3.desc">Resuelve dudas de producto, estado de pedidos y devoluciones al instante, en el idioma del cliente y a cualquier hora.</p>
+        </article>
+        <article class="case reveal">
+          <div class="case-tag" data-i18n="case.4.tag">Servicios B2B</div>
+          <h3 data-i18n="case.4.title">Prospección en frío, sin desgaste</h3>
+          <p data-i18n="case.4.desc">Campañas de llamadas y mensajes a listas segmentadas. El agente filtra y solo te pasa las conversaciones que valen la pena.</p>
+        </article>
+        <article class="case reveal">
+          <div class="case-tag" data-i18n="case.5.tag">Educación</div>
+          <h3 data-i18n="case.5.title">De interesado a matriculado</h3>
+          <p data-i18n="case.5.desc">Acompaña al alumno durante todo el embudo: resuelve dudas del programa, envía documentación y hace el seguimiento.</p>
+        </article>
+        <article class="case reveal">
+          <div class="case-tag" data-i18n="case.6.tag">Operaciones internas</div>
+          <h3 data-i18n="case.6.title">El copiloto de tu equipo</h3>
+          <p data-i18n="case.6.desc">Agentes internos que buscan en la documentación, generan informes y ejecutan tareas repetitivas del día a día.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section id="faq" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow" data-i18n="faq.eyebrow">FAQ</span>
+        <h2 data-i18n="faq.title">Preguntas frecuentes</h2>
+      </div>
+
+      <div class="faq">
+        <details class="reveal">
+          <summary data-i18n="faq.1.q">¿Cuánto tarda en estar funcionando?</summary>
+          <p data-i18n="faq.1.a">Un primer agente en producción suele tardar dos semanas desde el diagnóstico. Los proyectos con muchas integraciones o requisitos de seguridad pueden llevar entre cuatro y seis semanas.</p>
+        </details>
+        <details class="reveal">
+          <summary data-i18n="faq.2.q">¿Se nota que es una IA?</summary>
+          <p data-i18n="faq.2.a">La voz es natural y la latencia está por debajo del segundo, así que la conversación fluye. Dicho esto, siempre recomendamos que el agente se identifique como asistente virtual: genera más confianza y en muchos países es obligatorio.</p>
+        </details>
+        <details class="reveal">
+          <summary data-i18n="faq.3.q">¿Qué pasa si el agente no sabe responder?</summary>
+          <p data-i18n="faq.3.a">Definimos de antemano los límites del agente. Cuando la conversación sale de su ámbito, transfiere a una persona de tu equipo o toma el mensaje y agenda un seguimiento. Nunca improvisa sobre temas críticos.</p>
+        </details>
+        <details class="reveal">
+          <summary data-i18n="faq.4.q">¿Qué pasa con mis datos?</summary>
+          <p data-i18n="faq.4.a">Tus datos son tuyos. No se usan para entrenar modelos de terceros, ciframos todo en tránsito y en reposo, y en Enterprise podemos desplegar en tu propia infraestructura o región.</p>
+        </details>
+        <details class="reveal">
+          <summary data-i18n="faq.5.q">¿Necesito cambiar mi CRM o mis herramientas?</summary>
+          <p data-i18n="faq.5.a">No. El agente se adapta a tu stack, no al revés. Si existe una API o un webhook, nos conectamos.</p>
+        </details>
+        <details class="reveal">
+          <summary data-i18n="faq.6.q">¿En qué idiomas hablan los agentes?</summary>
+          <p data-i18n="faq.6.a">Español, inglés, portugués y otra veintena de idiomas. Un mismo agente puede detectar el idioma del interlocutor y responder en él.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACTO ================= -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contact-grid reveal">
+
+        <div class="contact-info">
+          <span class="eyebrow" data-i18n="contact.eyebrow">Contacto</span>
+          <h2 data-i18n="contact.title">Vemos tu caso en 45 minutos</h2>
+          <p data-i18n="contact.sub">Cuéntanos qué quieres automatizar. Te decimos si tiene sentido, cuánto costaría y qué retorno esperar — aunque acabes no trabajando con nosotros.</p>
+          <ul class="contact-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg>
+              <a href="mailto:hola@neboai.com">hola@neboai.com</a>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+10000000000">+1 (000) 000-0000</a>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <span data-i18n="contact.hours">Respondemos en menos de 24 h laborables</span>
+            </li>
+          </ul>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="name" data-i18n="form.name">Nombre</label>
+            <input type="text" id="name" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email" data-i18n="form.email">Email de trabajo</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="company" data-i18n="form.company">Empresa</label>
+            <input type="text" id="company" name="company" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="interest" data-i18n="form.interest">¿Qué te interesa?</label>
+            <select id="interest" name="interest">
+              <option data-i18n="form.opt1">Agentes de voz</option>
+              <option data-i18n="form.opt2">Chatbots y WhatsApp</option>
+              <option data-i18n="form.opt3">Automatizaciones e integraciones</option>
+              <option data-i18n="form.opt4">Consultoría / desarrollo a medida</option>
+              <option data-i18n="form.opt5">Aún no lo sé</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message" data-i18n="form.message">Cuéntanos brevemente tu caso</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="form.submit">Solicitar diagnóstico gratuito</button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          Nebo<span style="color:var(--cyan)">AI</span>
+        </a>
+        <p data-i18n="footer.tagline">Agentes de inteligencia artificial que llaman, responden y automatizan. Diseñados, entrenados y mantenidos por nosotros.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4 data-i18n="footer.services">Servicios</h4>
+          <ul>
+            <li><a href="#servicios" data-i18n="svc.voice.title">Agentes de voz</a></li>
+            <li><a href="#servicios" data-i18n="svc.chat.title">Chatbots y WhatsApp</a></li>
+            <li><a href="#servicios" data-i18n="footer.auto">Automatizaciones</a></li>
+            <li><a href="#servicios" data-i18n="footer.consult">Consultoría</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.company">Empresa</h4>
+          <ul>
+            <li><a href="#casos" data-i18n="nav.cases">Casos de uso</a></li>
+            <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
+            <li><a href="#contacto" data-i18n="footer.contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 data-i18n="footer.legal">Legal</h4>
+          <ul>
+            <li><a href="#" data-i18n="footer.privacy">Privacidad</a></li>
+            <li><a href="#" data-i18n="footer.terms">Términos</a></li>
+            <li><a href="#" data-i18n="footer.cookies">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Nebo AI. <span data-i18n="footer.rights">Todos los derechos reservados.</span></span>
+      <span data-i18n="footer.made">Hecho con agentes, no solo con código.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   i18n — ES (default, inline in the HTML) / EN
+   ========================================================= */
+const I18N = {
+  es: null, /* the markup already carries Spanish; filled at boot */
+  en: {
+    'doc.title': 'Nebo AI — AI agents for your business',
+    'nav.services': 'Services',
+    'nav.process': 'How it works',
+    'nav.cases': 'Use cases',
+    'nav.faq': 'FAQ',
+    'nav.cta': 'Book a demo',
+
+    'hero.eyebrow': 'AI agents in production',
+    'hero.title1': 'AI agents that',
+    'hero.title2': 'work for you',
+    'hero.title3': '24/7',
+    'hero.sub': 'At Nebo AI we design, train and deploy artificial intelligence agents that answer calls, reply on WhatsApp and automate your operation — wired into your CRM, your calendar and your tools.',
+    'hero.cta1': 'Book a free demo',
+    'hero.cta2': 'See services',
+    'hero.note': 'No lock-in · First agent live in 2 weeks',
+
+    'stats.1': 'Availability, no shifts',
+    'stats.2': 'Response latency',
+    'stats.3': 'Native integrations',
+    'stats.4': 'From idea to production',
+
+    'marquee.label': 'Works with your stack',
+
+    'services.eyebrow': 'Services',
+    'services.title': 'Everything an agent can do for your business',
+    'services.sub': 'Four service lines. Start with one and grow from there.',
+
+    'svc.voice.title': 'Voice agents',
+    'svc.voice.desc': 'Agents that place and receive calls with a natural voice, understand context, and act on your systems mid-conversation.',
+    'svc.voice.1': 'Inbound calls: support with no hold queue',
+    'svc.voice.2': 'Outbound calls: prospecting and lead follow-up',
+    'svc.voice.3': 'Automatic qualification and warm transfer to a human',
+    'svc.voice.4': 'Books appointments straight into your calendar',
+
+    'svc.chat.title': 'Chatbots and WhatsApp',
+    'svc.chat.desc': 'Text conversations that sell and resolve. On WhatsApp, on your site or on social, in your brand voice.',
+    'svc.chat.1': 'WhatsApp Business API, web chat, Instagram and Messenger',
+    'svc.chat.2': 'Answers from your docs and catalog (RAG)',
+    'svc.chat.3': 'Recovers carts and revives cold leads',
+    'svc.chat.4': 'Hands off to a human agent when needed',
+
+    'svc.auto.title': 'Automations and integrations',
+    'svc.auto.desc': 'Agents only matter if they touch your real systems. We connect CRM, calendar, email, billing and internal tools.',
+    'svc.auto.1': 'Workflows in n8n, Make or custom code',
+    'svc.auto.2': 'Two-way sync with your CRM',
+    'svc.auto.3': 'Custom APIs and webhooks',
+    'svc.auto.4': 'Automated reports and team alerts',
+
+    'svc.consult.title': 'Consulting and custom development',
+    'svc.consult.desc': 'Before automating, you have to understand. We audit your processes, measure where money leaks, and design the solution.',
+    'svc.consult.1': 'Process audit and AI opportunity mapping',
+    'svc.consult.2': 'Architecture design and model selection',
+    'svc.consult.3': 'Custom development on your infrastructure',
+    'svc.consult.4': 'Team training and knowledge handover',
+
+    'process.eyebrow': 'How it works',
+    'process.title': 'From first call to production in 2 weeks',
+    'process.sub': 'A short process with clear deliverables at every stage.',
+    'step.1.title': 'Discovery',
+    'step.1.desc': 'A 45-minute session. We map your processes and find where an agent adds the most value.',
+    'step.2.title': 'Design',
+    'step.2.desc': 'We define the script, the tools the agent will use and the success criteria. No surprises.',
+    'step.3.title': 'Build',
+    'step.3.desc': 'We train the agent on your information, connect it to your systems and test it with you.',
+    'step.4.title': 'Optimization',
+    'step.4.desc': 'We launch and measure. Every week we review real conversations and tune the agent.',
+
+    'cases.eyebrow': 'Use cases',
+    'cases.title': 'Where an agent moves the numbers',
+    'cases.sub': 'The industries where we see the fastest return.',
+    'case.1.tag': 'Real estate',
+    'case.1.title': 'No lead left uncalled',
+    'case.1.desc': 'The agent calls the lead within 60 seconds of the form landing, qualifies them and books the viewing in the advisor\'s calendar.',
+    'case.2.tag': 'Clinics and healthcare',
+    'case.2.title': 'Full calendar, free front desk',
+    'case.2.desc': 'Books, confirms and reschedules appointments by phone and WhatsApp. Cuts no-shows with reminders people actually answer.',
+    'case.3.tag': 'E-commerce',
+    'case.3.title': 'Support that never sleeps',
+    'case.3.desc': 'Resolves product questions, order status and returns instantly, in the customer\'s language, at any hour.',
+    'case.4.tag': 'B2B services',
+    'case.4.title': 'Cold outreach without the burnout',
+    'case.4.desc': 'Call and message campaigns over segmented lists. The agent filters and only hands you the conversations worth having.',
+    'case.5.tag': 'Education',
+    'case.5.title': 'From interested to enrolled',
+    'case.5.desc': 'Walks the student through the whole funnel: answers questions about the program, sends documents and follows up.',
+    'case.6.tag': 'Internal operations',
+    'case.6.title': 'Your team\'s copilot',
+    'case.6.desc': 'Internal agents that search your documentation, generate reports and run the repetitive daily tasks.',
+
+
+    'faq.eyebrow': 'FAQ',
+    'faq.title': 'Frequently asked questions',
+    'faq.1.q': 'How long until it\'s running?',
+    'faq.1.a': 'A first agent in production usually takes two weeks from discovery. Projects with many integrations or security requirements can take four to six weeks.',
+    'faq.2.q': 'Can people tell it\'s an AI?',
+    'faq.2.a': 'The voice is natural and latency stays under a second, so the conversation flows. That said, we always recommend the agent identify itself as a virtual assistant: it builds trust and in many countries it is required.',
+    'faq.3.q': 'What if the agent doesn\'t know the answer?',
+    'faq.3.a': 'We define the agent\'s boundaries up front. When a conversation goes out of scope, it transfers to someone on your team or takes a message and books a follow-up. It never improvises on critical topics.',
+    'faq.4.q': 'What happens with my data?',
+    'faq.4.a': 'Your data is yours. It is not used to train third-party models, everything is encrypted in transit and at rest, and on Enterprise we can deploy inside your own infrastructure or region.',
+    'faq.5.q': 'Do I need to change my CRM or my tools?',
+    'faq.5.a': 'No. The agent adapts to your stack, not the other way round. If there is an API or a webhook, we connect to it.',
+    'faq.6.q': 'What languages do the agents speak?',
+    'faq.6.a': 'Spanish, English, Portuguese and around twenty more. A single agent can detect the language of the person it is talking to and reply in it.',
+
+    'contact.eyebrow': 'Contact',
+    'contact.title': 'We review your case in 45 minutes',
+    'contact.sub': 'Tell us what you want to automate. We\'ll tell you whether it makes sense, what it would cost and what return to expect — even if you end up not working with us.',
+    'contact.hours': 'We reply within 24 business hours',
+    'form.name': 'Name',
+    'form.email': 'Work email',
+    'form.company': 'Company',
+    'form.interest': 'What are you interested in?',
+    'form.opt1': 'Voice agents',
+    'form.opt2': 'Chatbots and WhatsApp',
+    'form.opt3': 'Automations and integrations',
+    'form.opt4': 'Consulting / custom development',
+    'form.opt5': 'Not sure yet',
+    'form.message': 'Tell us briefly about your case',
+    'form.submit': 'Request a free assessment',
+    'form.sending': 'Sending…',
+    'form.ok': 'Thanks. We\'ll get back to you within 24 business hours.',
+    'form.error': 'Please fill in your name, email and message.',
+
+    'footer.tagline': 'Artificial intelligence agents that call, reply and automate. Designed, trained and maintained by us.',
+    'footer.services': 'Services',
+    'footer.auto': 'Automations',
+    'footer.consult': 'Consulting',
+    'footer.company': 'Company',
+    'footer.contact': 'Contact',
+    'footer.legal': 'Legal',
+    'footer.privacy': 'Privacy',
+    'footer.terms': 'Terms',
+    'footer.cookies': 'Cookies',
+    'footer.rights': 'All rights reserved.',
+    'footer.made': 'Built with agents, not just code.'
+  }
+};
+
+/* Spanish strings not present in the markup (JS-only messages). */
+const ES_EXTRA = {
+  'doc.title': 'Nebo AI — Agentes de inteligencia artificial para tu negocio',
+  'form.sending': 'Enviando…',
+  'form.ok': 'Gracias. Te respondemos en menos de 24 h laborables.',
+  'form.error': 'Rellena tu nombre, email y mensaje.'
+};
+
+const nodes = document.querySelectorAll('[data-i18n]');
+
+/* Snapshot the Spanish copy straight from the markup so we never duplicate it. */
+I18N.es = Object.assign({}, ES_EXTRA);
+nodes.forEach(el => { I18N.es[el.dataset.i18n] = el.innerHTML; });
+
+let lang = 'es';
+
+function setLang(next) {
+  if (!I18N[next]) return;
+  lang = next;
+  const dict = I18N[next];
+
+  nodes.forEach(el => {
+    const val = dict[el.dataset.i18n];
+    if (val != null) el.innerHTML = val;
+  });
+
+  document.documentElement.lang = next;
+  document.title = dict['doc.title'];
+  document.querySelectorAll('.lang button').forEach(b => {
+    b.setAttribute('aria-pressed', String(b.dataset.lang === next));
+  });
+
+  try { localStorage.setItem('nebo_lang', next); } catch (e) {}
+}
+
+document.querySelectorAll('.lang button').forEach(b => {
+  b.addEventListener('click', () => setLang(b.dataset.lang));
+});
+
+/* Boot: saved preference, else browser language. */
+(function initLang() {
+  let saved = null;
+  try { saved = localStorage.getItem('nebo_lang'); } catch (e) {}
+  const guess = (navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es';
+  setLang(saved || guess);
+})();
+
+/* =========================================================
+   Nav — sticky border + mobile menu
+   ========================================================= */
+const header = document.getElementById('header');
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(open));
+});
+navLinks.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    navLinks.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+});
+
+/* =========================================================
+   Hero orbit — nodes placed on the rings
+   ========================================================= */
+(function orbit() {
+  const el = document.querySelector('.orbit');
+  if (!el) return;
+  /* Radii match the three .ring insets: 0%, 14%, 28%. */
+  const rings = [
+    { r: 50, count: 7, offset: 0 },
+    { r: 36, count: 5, offset: 0.6 },
+    { r: 22, count: 3, offset: 1.2 }
+  ];
+  rings.forEach((ring, idx) => {
+    for (let i = 0; i < ring.count; i++) {
+      const a = (i / ring.count) * Math.PI * 2 + ring.offset;
+      const n = document.createElement('div');
+      n.className = 'node' + (idx % 2 ? ' v' : '');
+      n.style.left = (50 + Math.cos(a) * ring.r) + '%';
+      n.style.top = (50 + Math.sin(a) * ring.r) + '%';
+      el.appendChild(n);
+    }
+  });
+})();
+
+/* =========================================================
+   Reveal on scroll
+   ========================================================= */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = `${Math.min(i % 4, 3) * 70}ms`;
+  io.observe(el);
+});
+
+/* =========================================================
+   Contact form
+   TODO: point ENDPOINT at your real handler (Formspree, n8n
+   webhook, your API…). While it is null we fall back to
+   opening the user's mail client.
+   ========================================================= */
+const ENDPOINT = null;
+const MAILTO = 'hola@neboai.com';
+
+const form = document.getElementById('contactForm');
+const status = document.getElementById('formStatus');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+
+  if (!data.name || !data.email || !data.message) {
+    status.style.color = 'var(--violet-bright)';
+    status.textContent = I18N[lang]['form.error'];
+    return;
+  }
+
+  status.style.color = 'var(--cyan)';
+  status.textContent = I18N[lang]['form.sending'];
+
+  if (!ENDPOINT) {
+    const subject = encodeURIComponent(`[Nebo AI] ${data.interest} — ${data.company || data.name}`);
+    const body = encodeURIComponent(
+      `Nombre: ${data.name}\nEmail: ${data.email}\nEmpresa: ${data.company || '—'}\nInterés: ${data.interest}\n\n${data.message}`
+    );
+    window.location.href = `mailto:${MAILTO}?subject=${subject}&body=${body}`;
+    status.textContent = I18N[lang]['form.ok'];
+    form.reset();
+    return;
+  }
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error(res.status);
+    status.textContent = I18N[lang]['form.ok'];
+    form.reset();
+  } catch (err) {
+    status.style.color = 'var(--violet-bright)';
+    status.textContent = I18N[lang]['form.error'];
+  }
+});
+
+/* Footer year */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
