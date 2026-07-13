@@ -476,6 +476,54 @@ nav {
 }
 .card:nth-child(even) li::before { background: var(--violet-bright); }
 
+/* ---------- Voice (inbound / outbound) ---------- */
+
+.voice-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.voice-col {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg2), var(--bg));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.voice-col:hover { transform: translateY(-3px); }
+.voice-col.in-col:hover { border-color: var(--border-cyan); }
+.voice-col.out-col:hover { border-color: rgba(139, 92, 246, 0.3); }
+
+.voice-col .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  padding: 6px 14px;
+  margin-bottom: 20px;
+}
+.in-col .badge { color: var(--cyan); background: var(--cyan-subtle); border: 1px solid var(--border-cyan); }
+.out-col .badge { color: var(--violet-bright); background: var(--violet-subtle); border: 1px solid rgba(139, 92, 246, 0.3); }
+.voice-col .badge svg { width: 15px; height: 15px; }
+
+.voice-col h3 { font-size: 22px; margin-bottom: 10px; }
+.voice-col > p { color: var(--muted); font-size: 15.5px; margin-bottom: 20px; }
+.voice-col ul { list-style: none; display: grid; gap: 10px; }
+.voice-col li { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; color: var(--text-dim); }
+.voice-col li::before {
+  content: '';
+  flex: 0 0 5px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  margin-top: 9px;
+}
+.in-col li::before { background: var(--cyan); }
+.out-col li::before { background: var(--violet-bright); }
+
 /* ---------- Process ---------- */
 
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -655,7 +703,7 @@ footer {
 
 @media (max-width: 980px) {
   section { padding: 80px 0; }
-  .services, .cases { grid-template-columns: 1fr; }
+  .services, .cases, .voice-split { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; padding: 36px 28px; }
@@ -695,6 +743,7 @@ footer {
 
       <div class="nav-links" id="navLinks">
         <a href="#servicios" data-i18n="nav.services">Servicios</a>
+        <a href="#voz" data-i18n="nav.voice">Voz</a>
         <a href="#proceso" data-i18n="nav.process">Cómo funciona</a>
         <a href="#casos" data-i18n="nav.cases">Casos de uso</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
@@ -847,8 +896,53 @@ footer {
     </div>
   </section>
 
+  <!-- ================= AGENTES DE VOZ ================= -->
+  <section id="voz" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow" data-i18n="voice.eyebrow">Agentes de voz</span>
+        <h2 data-i18n="voice.title">Entrante y saliente, en un solo agente</h2>
+        <p data-i18n="voice.sub">Las llamadas que recibes y las que haces, gestionadas por la misma voz — conectada a tu CRM y tu calendario.</p>
+      </div>
+
+      <div class="voice-split">
+
+        <article class="voice-col in-col reveal">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7 7 7-7"/></svg>
+            <span data-i18n="voice.in.badge">Entrante</span>
+          </span>
+          <h3 data-i18n="voice.in.title">Recibe cada llamada al instante</h3>
+          <p data-i18n="voice.in.desc">El agente contesta al primer tono, sin colas ni horarios. Entiende el motivo de la llamada y resuelve o deriva.</p>
+          <ul>
+            <li data-i18n="voice.in.1">Atención y soporte 24/7, sin tiempo de espera</li>
+            <li data-i18n="voice.in.2">Cualifica al que llama y lo enruta al área correcta</li>
+            <li data-i18n="voice.in.3">Agenda, confirma y reprograma citas en tu calendario</li>
+            <li data-i18n="voice.in.4">Transfiere a un humano cuando hace falta</li>
+          </ul>
+        </article>
+
+        <article class="voice-col out-col reveal">
+          <span class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7-7 7 7"/></svg>
+            <span data-i18n="voice.out.badge">Saliente</span>
+          </span>
+          <h3 data-i18n="voice.out.title">Llama tú primero, a escala</h3>
+          <p data-i18n="voice.out.desc">El agente lanza las llamadas por ti: contacta leads en segundos y hace el seguimiento sin que nadie levante el teléfono.</p>
+          <ul>
+            <li data-i18n="voice.out.1">Contacta al lead en menos de 60 segundos</li>
+            <li data-i18n="voice.out.2">Prospección en frío sobre listas segmentadas</li>
+            <li data-i18n="voice.out.3">Seguimiento y recordatorios automáticos</li>
+            <li data-i18n="voice.out.4">Solo te pasa las conversaciones que valen la pena</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ================= PROCESO ================= -->
-  <section id="proceso" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
+  <section id="proceso">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow" data-i18n="process.eyebrow">Cómo funciona</span>
@@ -882,7 +976,7 @@ footer {
   </section>
 
   <!-- ================= CASOS ================= -->
-  <section id="casos">
+  <section id="casos" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow" data-i18n="cases.eyebrow">Casos de uso</span>
@@ -926,7 +1020,7 @@ footer {
   </section>
 
   <!-- ================= FAQ ================= -->
-  <section id="faq" style="background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border)">
+  <section id="faq">
     <div class="wrap">
       <div class="section-head center reveal">
         <span class="eyebrow" data-i18n="faq.eyebrow">FAQ</span>
@@ -1080,6 +1174,7 @@ const I18N = {
   en: {
     'doc.title': 'Nebo AI — AI agents for your business',
     'nav.services': 'Services',
+    'nav.voice': 'Voice',
     'nav.process': 'How it works',
     'nav.cases': 'Use cases',
     'nav.faq': 'FAQ',
@@ -1132,6 +1227,24 @@ const I18N = {
     'svc.consult.2': 'Architecture design and model selection',
     'svc.consult.3': 'Custom development on your infrastructure',
     'svc.consult.4': 'Team training and knowledge handover',
+
+    'voice.eyebrow': 'Voice agents',
+    'voice.title': 'Inbound and outbound, in a single agent',
+    'voice.sub': 'The calls you receive and the ones you make, handled by the same voice — wired into your CRM and your calendar.',
+    'voice.in.badge': 'Inbound',
+    'voice.in.title': 'Answer every call instantly',
+    'voice.in.desc': 'The agent picks up on the first ring, no queues, no hours. It understands why they called and resolves or routes.',
+    'voice.in.1': '24/7 support with zero hold time',
+    'voice.in.2': 'Qualifies the caller and routes them to the right area',
+    'voice.in.3': 'Books, confirms and reschedules in your calendar',
+    'voice.in.4': 'Transfers to a human when needed',
+    'voice.out.badge': 'Outbound',
+    'voice.out.title': 'Reach out first, at scale',
+    'voice.out.desc': 'The agent places the calls for you: it reaches leads in seconds and follows up without anyone picking up the phone.',
+    'voice.out.1': 'Contacts the lead in under 60 seconds',
+    'voice.out.2': 'Cold outreach over segmented lists',
+    'voice.out.3': 'Automatic follow-ups and reminders',
+    'voice.out.4': 'Only hands you the conversations worth having',
 
     'process.eyebrow': 'How it works',
     'process.title': 'From first call to production in 2 weeks',
@@ -1380,6 +1493,11 @@ form.addEventListener('submit', async (e) => {
 /* Footer year */
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+
+<!-- Live chat — LeadConnector -->
+<script src="https://widgets.leadconnectorhq.com/loader.js"
+        data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+        data-widget-id="6a54e0ebd166a8719ff3eeec"></script>
 
 </body>
 </html>
